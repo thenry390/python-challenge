@@ -4,6 +4,7 @@ Created on Sun Sep 27 08:46:24 2020
 
 @author: thenry
 """
+#added a test to make sure push works in git
 
 import os
 import csv
