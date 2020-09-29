@@ -65,31 +65,15 @@ reportList.append("Average Change: $" + str(round((x/y),2)))
 reportList.append("Greatest Increase in Profits: " + str(greatestIncreaseList[0] + " ($" + greatestIncreaseList[1] + ")"))
 reportList.append("Greatest Decrease in Profits: " + str(greatestDecreaseList[0] + " ($" + greatestDecreaseList[1] + ")"))
 
-#print the report to standard output, i.e. console
-print(reportList[0])
-print(reportList[1])
-print(reportList[2])
-print(reportList[3])
-print(reportList[4])
-print(reportList[5])
-print(reportList[6])
+#print to standard output, or console
+for i in range(len(reportList)):
+    print(reportList[i])
 
-
-#write the report to a file called "analysis_output.csv"
-# Open the file using "write" mode. Specify the variable to hold the contents
-with open(output_path, 'w', newline='') as csvfile:
-
-    # Initialize csv.writer
-    csvwriter = csv.writer(csvfile, delimiter=',')
-
-    # Write the first row 
-    csvwriter.writerow([reportList[0]])
-    csvwriter.writerow([reportList[1]])
-    csvwriter.writerow([reportList[2]])
-    csvwriter.writerow([reportList[3]])
-    csvwriter.writerow([reportList[4]])
-    csvwriter.writerow([reportList[5]])
-    csvwriter.writerow([reportList[6]])
+#print to file   
+f = open('./analysis/analysis_output.txt', 'w', newline='')  
+for reportLine in reportList:
+    f.write(reportLine+'\n')
+f.close()
 
 
 
