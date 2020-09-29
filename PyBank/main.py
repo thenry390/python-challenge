@@ -30,7 +30,6 @@ with open(budget_csv) as csv_file:
 
     # Read the header row first (skip this part if there is no header)
     csv_header = next(csv_file)
-    print(f"Header: {csv_header}")
 
     # Read through each row of data after the header
     for row in csv_reader:
@@ -52,15 +51,13 @@ with open(budget_csv) as csv_file:
                 greatestDecreaseAmount=int(row[1])  
                 greatestDecreaseList = row
             
+x=sum(monthOverMonthChange)-monthOverMonthChange[0]
+y = len(monthOverMonthChange)-1
+
 print("Financial Analysis")
 print("--------------------------------------")
 print("Total Months: " + str(totalMonths))
 print("Total: $" + str(totalAmount))
-
-x=sum(monthOverMonthChange)-monthOverMonthChange[0]
-y = len(monthOverMonthChange)-1
-
-
 print("Average Change: $" + str(round((x/y),2)))
 print("Greatest Increase in Profits: " + str(greatestIncreaseList[0] + " ($" + greatestIncreaseList[1] + ")"))
 print("Greatest Decrease in Profits: " + str(greatestDecreaseList[0] + " ($" + greatestDecreaseList[1] + ")"))
