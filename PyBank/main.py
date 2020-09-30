@@ -21,10 +21,11 @@ greatestIncreaseList=[]
 greatestDecreaseList=[]
 x=0
 y=0
+# define a list of lists for finding max and min
 maxValue=0
 minValue=0
 reportList=[]
-trackChangeDict ={"Month":[],"Amount":[]}
+#trackChangeDict ={'Month':[],'Amount':[]}
 
 budget_csv = os.path.join("Resources", "budget_data.csv")
 # Specify the file to write to
@@ -40,19 +41,9 @@ with open(budget_csv) as csv_file:
     # Read through each row of data after the header
     for row in csv_reader:
 
-#        if (previousMonth > 0):
         monthOverMonthChange.append(int(row[1])-previousMonth)
-        trackChangeDict["Month"].append(row[0])
-        if (previousMonth==0):
-            trackChangeDict["Amount"].append(0)
-        else:
-            trackChangeDict["Amount"].append(int(row[1])-previousMonth)
 
         previousMonth = int(row[1])        
-
-        totalMonths = totalMonths + 1
-        totalAmount = totalAmount + int(row[1])
-        
 
         if (int(row[1]) > 0):
             if (int(row[1]) > greatestIncreaseAmount):
@@ -63,6 +54,9 @@ with open(budget_csv) as csv_file:
                 greatestDecreaseAmount=int(row[1])  
                 greatestDecreaseList = row
                 
+        totalMonths = totalMonths + 1
+        totalAmount = totalAmount + int(row[1])
+        
 x=sum(monthOverMonthChange)-monthOverMonthChange[0]
 y = len(monthOverMonthChange)-1
 
@@ -71,22 +65,8 @@ reportList.append("--------------------------------------")
 reportList.append("Total Months: " + str(totalMonths))
 reportList.append("Total: $" + str(totalAmount))
 reportList.append("Average Change: $" + str(round((x/y),2)))
-#reportList.append("Greatest Increase in Profits: " + str(greatestIncreaseList[0] + " ($" + greatestIncreaseList[1] + ")"))
 reportList.append("Greatest Increase in Profits: " + str(greatestIncreaseList[0] + " ($" + str(max(monthOverMonthChange)) + ")"))
-#keyMax=max(trackChangeDict.keys(), key=(lambda k: trackChangeDict[k]))
-#print("trackChangeDict[keyMax]: "+str(trackChangeDict[keyMax]))
-#reportList.append("Greatest Increase in Profits: " + str(greatestIncreaseList[0] + " ($" + trackChangeDict[keyMax]))
-#print("Max value" + str(max(trackChangeDict, key=trackChangeDict.get)))
-#print("Max value" +str(max(trackChangeDict.keys(), key=(lambda k: trackChangeDict[k]))))
-
-#reportList.append("Greatest Decrease in Profits: " + str(greatestDecreaseList[0] + " ($" + greatestDecreaseList[1] + ")"))
 reportList.append("Greatest Decrease in Profits: " + str(greatestDecreaseList[0] + " ($" + str(min(monthOverMonthChange)) + ")"))
-#reportList.append("Greatest Decrease in Profits: " + str(greatestDecreaseList[0] + " ($" + str(min(trackChangeDict, key=trackChangeDict.get)) + ")"))
-#print("Min value" + str(min(trackChangeDict, key=trackChangeDict.get)))
-#keyMin=min(trackChangeDict.keys(), key=(lambda k: trackChangeDict[k]))
-#reportList.append("Greatest Decrease in Profits: " + str(greatestDecreaseList[0] + " ($" + trackChangeDict[keyMin]))
-#print("Min value" +str(min(trackChangeDict.keys(), key=(lambda k: trackChangeDict[k]))))
-
 
 #print to standard output, or console
 for i in range(len(reportList)):
