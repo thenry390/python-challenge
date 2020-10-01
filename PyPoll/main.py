@@ -17,7 +17,7 @@ listLocation=0
 reportVoteCount=0
 votesCastPercent=0.0
 
-election_csv = os.path.join("Resources", "election_data_sample.csv")
+election_csv = os.path.join("Resources", "election_data.csv")
 # Specify the file to write to
 output_path = os.path.join("analysis", "analysis_output.csv")
 
