@@ -14,6 +14,8 @@ reportList=[]
 maxVoteCount=0
 winner=""
 listLocation=0
+reportVoteCount=0
+votesCastPercent=0.0
 
 election_csv = os.path.join("Resources", "election_data_sample.csv")
 # Specify the file to write to
@@ -51,9 +53,20 @@ reportList.append("Election Results")
 reportList.append("--------------------------------------")
 reportList.append("Total Votes: " + str(totalVotesCast))
 reportList.append("--------------------------------------")
+
 for voter in voteTabulation:
-    reportList.append(voter)
     listLocation = listLocation + 1
+    if listLocation == 1:
+        candidateStr = voter
+    else:
+        reportVoteCount = voter
+        
+    if listLocation==2:
+        listLocation=0
+        votesCastPercent = round(((reportVoteCount / totalVotesCast) * 100),3)
+        
+        reportList.append(candidateStr + ": " + str(votesCastPercent) + "% (" + str(reportVoteCount) + ")")  
+        
 reportList.append("--------------------------------------")
 reportList.append("Winner: " + winner)
 reportList.append("--------------------------------------")
