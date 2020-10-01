@@ -13,6 +13,7 @@ voteCount=0
 reportList=[]
 maxVoteCount=0
 winner=""
+listLocation=0
 
 election_csv = os.path.join("Resources", "election_data_sample.csv")
 # Specify the file to write to
@@ -35,7 +36,7 @@ with open(election_csv) as csv_file:
             indexOfRow=-1
             
         if (indexOfRow==-1):
-            voteTabulation.append(row[0])
+#            voteTabulation.append(row[0])
             voteTabulation.append(row[2])
             voteTabulation.append(1)
         else:
@@ -50,8 +51,11 @@ reportList.append("Election Results")
 reportList.append("--------------------------------------")
 reportList.append("Total Votes: " + str(totalVotesCast))
 reportList.append("--------------------------------------")
-
+for voter in voteTabulation:
+    reportList.append(voter)
+    listLocation = listLocation + 1
 reportList.append("--------------------------------------")
+reportList.append("Winner: " + winner)
 reportList.append("--------------------------------------")
 
 #print to standard output, or console
@@ -61,7 +65,7 @@ for i in range(len(reportList)):
 #print to file   
 f = open('./analysis/analysis_output.txt', 'w', newline='')  
 for reportLine in reportList:
-    f.write(reportLine+'\n')
+    f.write(reportLine +'\n')
 f.close()
 
 
